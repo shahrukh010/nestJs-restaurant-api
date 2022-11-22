@@ -8,7 +8,7 @@ import { MongooseModule } from '@nestjs/mongoose';
   imports: [
     RestaurantModule,
     MongooseModule.forRoot(
-      'mongodb+srv://mongodb:UZ1xQr54GMbw2N9C@cluster0.uisntpy.mongodb.net/restaurant?retryWrites=true&w=majority',
+      'mongodb+srv://mongodb:DjG8hkIP1KiQ9QBp@cluster0.uisntpy.mongodb.net/restaurant?retryWrites=true&w=majority',
     ),
   ],
   controllers: [AppController],
