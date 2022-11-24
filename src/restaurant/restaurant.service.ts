@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
 import { Restaurant } from './schema/restaurant.schema';
@@ -19,5 +19,24 @@ export class RestaurantService {
     console.log(restaurant);
     const rest = this.restaurantModel.create(restaurant);
     return rest;
+  }
+
+  async findRestaurantById(id: string): Promise<Restaurant> {
+    const restaurant = await this.restaurantModel.findById(id);
+
+    if (!restaurant) {
+      throw new NotFoundException('Restaurant Not Found.');
+    }
+    return restaurant;
+  }
+
+  async updateRestaurantById(
+    id: string,
+    restaurant: Restaurant,
+  ): Promise<Restaurant> {
+    return await this.restaurantModel.findByIdAndUpdate(id, restaurant, {
+      new: true,
+      runValidators: true,
+    });
   }
 }
